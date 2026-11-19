@@ -4,6 +4,8 @@ import { env } from './src/config/env.js';
 import { connectDB } from './src/config/dbConfig.js';
 import authRoutes from './src/routes/authRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
+import packageRoutes from './src/routes/packageRoutes.js';
+import favoriteRoutes from './src/routes/favoriteRoutes.js';
 import { errorHandler } from './src/middlewares/errorHandler.js';
 
 const app = express();
@@ -15,13 +17,15 @@ app.get('/api/health', (_req, res) => res.json({ ok: true }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/packages', packageRoutes);
+app.use('/api/favorites', favoriteRoutes);
 
 app.use((_req, res) => res.status(404).json({ message: 'Ruta no encontrada' }));
 app.use(errorHandler);
 
 const start = async () => {
   await connectDB();
-  app.listen(env.port, () => console.log(`✅ http://localhost:${env.port}`));
+  app.listen(env.port, () => console.log(`ðŸš€ http://localhost:${env.port}`));
 };
 
 start();
