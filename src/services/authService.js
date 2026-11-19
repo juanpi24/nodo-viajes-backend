@@ -5,7 +5,7 @@ import { signToken } from '../utils/jwt.js';
 export const register = async ({ nombre, email, password }) => {
   const existe = await User.findOne({ email });
   if (existe) {
-    const error = new Error('El email ya estÃ¡ registrado');
+    const error = new Error('El email ya está registrado');
     error.status = 409;
     throw error;
   }
