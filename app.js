@@ -6,6 +6,7 @@ import authRoutes from './src/routes/authRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
 import packageRoutes from './src/routes/packageRoutes.js';
 import favoriteRoutes from './src/routes/favoriteRoutes.js';
+import orderRoutes from './src/routes/orderRoutes.js';
 import { errorHandler } from './src/middlewares/errorHandler.js';
 
 const app = express();
@@ -19,6 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/packages', packageRoutes);
 app.use('/api/favorites', favoriteRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.use((_req, res) => res.status(404).json({ message: 'Ruta no encontrada' }));
 app.use(errorHandler);
