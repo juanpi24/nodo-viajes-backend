@@ -27,7 +27,7 @@ app.use(errorHandler);
 
 const start = async () => {
   await connectDB();
-  app.listen(env.port, () => console.log(`ðŸš€ http://localhost:${env.port}`));
+  app.listen(env.port, () => console.log(`🚀 http://localhost:${env.port}`));
 };
 
 start();
