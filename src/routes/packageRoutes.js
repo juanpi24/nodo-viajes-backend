@@ -1,6 +1,7 @@
 ﻿import { Router } from 'express';
 import { list, getById, create, update, remove } from '../controllers/packageController.js';
 import { getWeather } from '../controllers/weatherController.js';
+import { importPackages } from '../controllers/importController.js';
 import { protect } from '../middlewares/authMiddleware.js';
 import { adminOnly } from '../middlewares/roleMiddleware.js';
 import { validate } from '../validations/validate.js';
@@ -17,5 +18,8 @@ router.get('/:id/weather', getWeather);
 router.post('/', protect, adminOnly, validate(createPackageSchema), create);
 router.put('/:id', protect, adminOnly, validate(updatePackageSchema), update);
 router.delete('/:id', protect, adminOnly, remove);
+
+// NUEVA RUTA DE IMPORTACIÓN
+router.post('/import', protect, adminOnly, importPackages);
 
 export default router;
