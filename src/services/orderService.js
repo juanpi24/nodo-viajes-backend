@@ -16,9 +16,13 @@ export const createOrder = async (userId, user, items) => {
       throw error;
     }
 
+    // Descontar el STOCK Actual del paquete en la DB (para evitar overselling)
+    const PackageModel = (await import('../models/Package.js')).Package;
+    await PackageModel.findByIdAndUpdate(pkg._id, { $inc: { stock: -item.cantidad } });
+
     orderItems.push({
       package: pkg._id,
-      titulo: pkg.titulo, // Guardamos el título para la preferencia de MP
+      titulo: pkg.titulo,
       cantidad: item.cantidad,
       precioUnitario: pkg.precio
     });
@@ -27,7 +31,7 @@ export const createOrder = async (userId, user, items) => {
   }
 
   // 2. Crear la orden en la DB (pending)
-  const order = await orderRepository.create({
+   const order = await orderRepository.create({
     user: userId,
     items: orderItems,
     total
