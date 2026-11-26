@@ -11,7 +11,7 @@ const packageSchema = new mongoose.Schema(
     categoria: {
       type: String,
       required: true,
-      enum: ['Naturaleza', 'Lagos y Glaciares', 'MontaÃ±a', 'Aventura', 'Ciudad'],
+      enum: ['Todas','Naturaleza', 'Lagos y Glaciares', 'Montaña', 'Aventura', 'Ciudad'],
     },
     destacado: { type: Boolean, default: false },
     coordenadas: {
